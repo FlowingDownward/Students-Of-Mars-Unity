@@ -1,9 +1,14 @@
-using UnityEngine;
+ using UnityEngine;
 using UnityEditor;
 
 public class Path : MonoBehaviour
 {
     public GameObject[] Waypoints;
+
+    public Vector3 GetPosition(int index)
+    {
+        return Waypoints[index].transform.position;
+    }
 
     private void OnDrawGizmos()
     {
