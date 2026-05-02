@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private Path currentPath; 
+    [SerializeField] private EnemyData data;
+    public static event Action<EnemyData> OnEnemyReachedEnd;
+
+    private Path currentPath; 
     
     private Vector3 _targetPosition;
     private int _currentWaypoint;
@@ -23,7 +26,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         // Move towards target destination
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition,
-        moveSpeed * Time.deltaTime);
+        data.speed * Time.deltaTime);
 
         // When target reached, set new target positon
         float relativeDistance = (transform.position - _targetPosition).magnitude;
@@ -34,8 +37,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 _currentWaypoint++;
                 _targetPosition = currentPath.GetPosition(_currentWaypoint);
             }
-            else
+            else //Reached last waypoin
             {
+                OnEnemyReachedEnd?.Invoke(data);
                 gameObject.SetActive(false);
             }
             
