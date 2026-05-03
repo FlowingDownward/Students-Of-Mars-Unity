@@ -5,11 +5,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyData data;
     public static event Action<EnemyData> OnEnemyReachedEnd;
+    public static event Action<Enemy> OnEnemyDestroyed;
 
     private Path currentPath; 
     
     private Vector3 _targetPosition;
     private int _currentWaypoint;
+    private float _health;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
     {
         _currentWaypoint = 0;
         _targetPosition = currentPath.GetPosition(_currentWaypoint);
+        _health = data.health;
     }
 
     void Update()
@@ -37,12 +40,24 @@ public class Enemy : MonoBehaviour
                 _currentWaypoint++;
                 _targetPosition = currentPath.GetPosition(_currentWaypoint);
             }
-            else //Reached last waypoin
+            else //Reached last waypoint
             {
                 OnEnemyReachedEnd?.Invoke(data);
                 gameObject.SetActive(false);
             }
             
+        }
+    }
+
+    public void TakeDamage (float damage)
+    {
+        _health -= damage;
+        _health = Math.Max(_health, 0);
+
+        if (_health <= 0)
+        {
+            OnEnemyDestroyed?.Invoke(this);
+            gameObject.SetActive(false);
         }
     }
 }
