@@ -73,7 +73,6 @@ public class Spawner : MonoBehaviour
                 enemiesRemoved = 0;
                 spawnTimer = 0f;
                 isBetweenWaves = false;
-
             }
         }
         else
@@ -99,6 +98,11 @@ public class Spawner : MonoBehaviour
         {
             GameObject spawnedObject = pool.GetPooledObject();
             
+            if (spawnedObject != null)
+            {
+                spawnedObject.transform.position = transform.position;
+                spawnedObject.SetActive(true);
+            }
         }
     }
 

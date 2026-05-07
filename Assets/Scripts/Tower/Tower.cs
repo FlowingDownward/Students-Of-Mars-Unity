@@ -12,6 +12,16 @@ public class Tower : MonoBehaviour
 
     private float shootTimer;
 
+    private void OnEnable()
+    {
+        Enemy.OnEnemyDestroyed += HandleEnemyDestroyed;
+    }
+
+    private void OnDisable()
+    {
+        Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed;
+    }
+
     private void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -75,6 +85,11 @@ public class Tower : MonoBehaviour
             Vector2 shootDirection = (enemiesInRange[0].transform.position - transform.position).normalized;
             projectile.GetComponent<Projectile>().Shoot(data, shootDirection);
         }
+    }
+
+    private void HandleEnemyDestroyed(Enemy enemy)
+    {
+        enemiesInRange.Remove(enemy);
     }
 
 }
