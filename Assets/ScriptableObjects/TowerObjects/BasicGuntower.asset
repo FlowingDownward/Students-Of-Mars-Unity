@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f9d7349b855b2408cd2ae80a8f7618, type: 3}
   m_Name: BasicGuntower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  prefab: {fileID: 1128706447885169290, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
   range: 3
   attackSpeed: 1
   projectileSpeed: 10

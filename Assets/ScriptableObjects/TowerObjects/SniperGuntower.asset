@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f9d7349b855b2408cd2ae80a8f7618, type: 3}
   m_Name: SniperGuntower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  range: 5
+  prefab: {fileID: 7814010061299923796, guid: d5917533a8d39ef4ca5b10d39994788b, type: 3}
+  range: 4.5
   attackSpeed: 2.5
   projectileSpeed: 20
   projectileDuration: 2
