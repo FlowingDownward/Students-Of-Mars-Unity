@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: BasicGuntower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 1128706447885169290, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
-  range: 3
+  range: 9
   attackSpeed: 1
   projectileSpeed: 10
   projectileDuration: 2
   projectileSize: 1
+  isExplosiveProjectile: 0
+  explosionDuration: 0
   damage: 1
+  price: 30

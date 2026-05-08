@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88f9d7349b855b2408cd2ae80a8f7618, type: 3}
-  m_Name: SniperGuntower
+  m_Name: LazerTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  prefab: {fileID: 7814010061299923796, guid: d5917533a8d39ef4ca5b10d39994788b, type: 3}
-  range: 12
-  attackSpeed: 2.5
+  prefab: {fileID: 1083293338089138313, guid: 25e8978d0d7a44942b14d45a18ffbac8, type: 3}
+  range: 10
+  attackSpeed: 1
   projectileSpeed: 20
   projectileDuration: 2
   projectileSize: 1.5
   isExplosiveProjectile: 0
   explosionDuration: 0
-  damage: 5
-  price: 100
+  damage: 2
+  price: 200

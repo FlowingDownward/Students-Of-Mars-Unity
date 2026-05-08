@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7814010061299923796
+--- !u!1 &6209416152776330547
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,67 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6351188786207011505}
-  - component: {fileID: 7227491710987498541}
-  - component: {fileID: 6142185809026353375}
-  - component: {fileID: 6205266181939024453}
-  - component: {fileID: 1247765536441054753}
-  m_Layer: 6
-  m_Name: Sniper Guntower
+  - component: {fileID: 5390936679570715977}
+  - component: {fileID: 3769335509550770883}
+  - component: {fileID: 2283886755789260197}
+  - component: {fileID: 3241832478849508888}
+  - component: {fileID: 4319149255063797099}
+  m_Layer: 0
+  m_Name: Projectile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6351188786207011505
+--- !u!4 &5390936679570715977
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814010061299923796}
+  m_GameObject: {fileID: 6209416152776330547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.05, y: 0.92, z: 0}
+  m_LocalPosition: {x: -5.6146293, y: 2.521408, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7227491710987498541
+--- !u!114 &3769335509550770883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814010061299923796}
+  m_GameObject: {fileID: 6209416152776330547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024cced436782304d80365fc62b6c238, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9f8e823e12a6b42b9065e9da55b330, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tower
-  data: {fileID: 11400000, guid: de58a02b64591f347ad6cc07ee30ca92, type: 2}
---- !u!114 &6142185809026353375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814010061299923796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ed95c2a36eada4ebfddab063a2492a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  prefab: {fileID: 6209416152776330547, guid: 54b1aba0d0412bf45b3f20237b50b460, type: 3}
-  poolSize: 5
---- !u!212 &6205266181939024453
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  isFire: 1
+--- !u!212 &2283886755789260197
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814010061299923796}
+  m_GameObject: {fileID: 6209416152776330547}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -109,24 +95,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3328599684920167868, guid: aa63c94dacbbacd4ea3db8aa44efd4c1, type: 3}
+  m_Sprite: {fileID: 4201554491222685521, guid: fc3453f8cad89e24aa3988dccf7f7f78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.44, y: 0.44}
+  m_Size: {x: 0.22, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1247765536441054753
+--- !u!58 &3241832478849508888
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814010061299923796}
+  m_GameObject: {fileID: 6209416152776330547}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -150,9 +136,36 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_Radius: 0.12
+--- !u!50 &4319149255063797099
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209416152776330547}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -6,9 +6,23 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnLivesChanged;
     public static event Action<int> OnCreditsChanged;
 
-    private int playerLives = 20;
-    private int playerCredits = 10;
+    private int playerLives = 30;
+    private int playerCredits = 20;
     
+    public int PlayerCredits => playerCredits;
+
+    public static GameManager Instance;
+
+    private void Start()
+    {
+        OnLivesChanged?.Invoke(playerLives);
+        OnCreditsChanged?.Invoke(playerCredits);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void OnEnable()
     {
@@ -23,11 +37,14 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Start()
+    public bool TrySpendCredits(int amount)
     {
-        OnLivesChanged?.Invoke(playerLives);
-        OnCreditsChanged?.Invoke(playerCredits);
+        if (playerCredits < amount)
+            return false;
 
+        playerCredits -= amount;
+        OnCreditsChanged?.Invoke(playerCredits);
+        return true;
     }
 
     private void HandleEnemyReachedEnd(EnemyData data){

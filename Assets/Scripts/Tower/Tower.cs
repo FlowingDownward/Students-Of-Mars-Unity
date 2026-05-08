@@ -43,7 +43,7 @@ public class Tower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, data.range);
+        Gizmos.DrawWireSphere(transform.position, data.range*.3f);
     }
 
 

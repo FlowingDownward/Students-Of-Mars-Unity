@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +12,12 @@ public class TowerPlacementManager : MonoBehaviour
     private Camera mainCamera;
 
     [SerializeField] private LayerMask blockedLayer;
-    [SerializeField] private float checkRadius = 0.5f;
 
     [SerializeField] private Path path;
     [SerializeField] private float minDistanceFromPath = 1.5f;
+
+    [SerializeField] private TMP_Text placementHintText;
+
 
     private TowerPreview previewVisual;
     private bool canPlace;
@@ -23,6 +26,7 @@ public class TowerPlacementManager : MonoBehaviour
     {
         Instance = this;
         mainCamera = Camera.main;
+        placementHintText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -47,8 +51,11 @@ public class TowerPlacementManager : MonoBehaviour
     {
         selectedTower = towerData;
         previewObject = Instantiate(towerData.prefab);
+        Debug.Log("Preview");
+
         previewVisual = previewObject.GetComponent<TowerPreview>();
         SetPreviewMode(previewObject, true);
+        placementHintText.gameObject.SetActive(true);
     }
 
     private void FollowMouse()
@@ -64,11 +71,10 @@ public class TowerPlacementManager : MonoBehaviour
 
     private void ValidatePlacement(Vector3 position)
     {
-        bool blockedByObjects = Physics2D.OverlapCircle(position, checkRadius, blockedLayer) != null;
 
         bool tooCloseToPath = path.IsPointTooClose(position, minDistanceFromPath);
 
-        canPlace = !blockedByObjects && !tooCloseToPath;
+        canPlace = !tooCloseToPath;
 
         if (previewVisual != null)
         {
@@ -83,12 +89,22 @@ public class TowerPlacementManager : MonoBehaviour
             return;
         }
 
-        Instantiate(selectedTower.prefab, previewObject.transform.position, Quaternion.identity);
+    if (!GameManager.Instance.TrySpendCredits(selectedTower.price))
+    {
+        Debug.Log("Not enough credits!");
+        return;
+    }
+        Debug.Log("Enough credits!");
 
+        Instantiate(selectedTower.prefab,
+        previewObject.transform.position,
+        Quaternion.identity);
         Destroy(previewObject);
 
         previewObject = null;
         selectedTower = null;
+
+        placementHintText.gameObject.SetActive(false);
     }
 
     private void CancelPlacement()
@@ -97,6 +113,8 @@ public class TowerPlacementManager : MonoBehaviour
 
         previewObject = null;
         selectedTower = null;
+
+        placementHintText.gameObject.SetActive(false);
     }
 
     private void SetPreviewMode(GameObject tower, bool previewMode)
