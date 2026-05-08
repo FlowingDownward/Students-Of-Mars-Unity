@@ -5,10 +5,20 @@ public class Path : MonoBehaviour
 {
     public GameObject[] Waypoints;
 
+    private EdgeCollider2D edgeCollider;
+    private LineRenderer lineRenderer;
+
     public int WaypointCount => Waypoints.Length;
 
-    public float minBuildDistance = 1.5f;
+    private void Awake()
+    {
+        edgeCollider = GetComponent<EdgeCollider2D>();
+        lineRenderer = GetComponent<LineRenderer>();
 
+        GenerateColliderFromWaypoints();
+        GenerateLineFromWaypoints();
+    }
+    
     public Vector3 GetPosition(int index)
     {
         return Waypoints[index].transform.position;
@@ -17,43 +27,58 @@ public class Path : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Waypoints.Length > 0)
+        if (Waypoints == null || Waypoints.Length <= 0)
+            return;
+            
+        for (int i = 0; i < Waypoints.Length; i++)
         {
-            for (int i = 0; i < Waypoints.Length; i++)
-            {
-                GUIStyle style = new GUIStyle();
-                style.normal.textColor = Color.white;
-                style.alignment = TextAnchor.MiddleCenter;
-                Handles.Label(Waypoints[i].transform.position + Vector3.up * 0.7f, Waypoints[i].name, style);
+            GUIStyle style = new GUIStyle();
+            style.normal.textColor = Color.white;
+            style.alignment = TextAnchor.MiddleCenter;
+            Handles.Label(Waypoints[i].transform.position + Vector3.up * 0.7f, Waypoints[i].name, style);
 
-
-                if (i < Waypoints.Length - 1)
-                {  
-                    Gizmos.color = Color.gray;
-                    Gizmos.DrawLine(Waypoints[i].transform.position, Waypoints[i+1].transform.position);
-                }
+            if (i < Waypoints.Length - 1)
+            {  
+                Vector3 start = Waypoints[i].transform.position;
+                Vector3 end = Waypoints[i + 1].transform.position;
                 
-            }
+                Gizmos.color = Color.gray;
+                Gizmos.DrawLine(start, end);
+            }                
         }
     }
 
-    public bool IsPointTooClose(Vector3 point, float minDistance)
+    public void GenerateColliderFromWaypoints()
     {
-        for (int i = 0; i < Waypoints.Length - 1; i++)
+        if (Waypoints == null || Waypoints.Length < 2)
+            return;
+
+        Vector2[] points = new Vector2[Waypoints.Length];
+
+        for (int i = 0; i < Waypoints.Length; i++)
         {
-            Vector3 a = Waypoints[i].transform.position;
-            Vector3 b = Waypoints[i + 1].transform.position;
-
-            float dist = DistancePointToSegment(point, a, b);
-
-            if (dist < minDistance)
-            {
-                return true;
-            }
+            // convert world to local space
+            points[i] = transform.InverseTransformPoint(
+                Waypoints[i].transform.position
+            );
         }
 
-        return false;
+        edgeCollider.points = points;
     }
+
+    public void GenerateLineFromWaypoints()
+    {
+        if (Waypoints == null || Waypoints.Length < 2)
+            return;
+
+        lineRenderer.positionCount = Waypoints.Length;
+
+        for (int i = 0; i < Waypoints.Length; i++)
+        {
+            lineRenderer.SetPosition(i, Waypoints[i].transform.position);
+        }
+    }
+    
 
     private float DistancePointToSegment(Vector3 p, Vector3 a, Vector3 b)
     {
@@ -67,4 +92,14 @@ public class Path : MonoBehaviour
 
         return Vector3.Distance(p, closest);
     }
+
+    private void OnValidate()
+    {
+        if (edgeCollider == null)
+        {
+            edgeCollider = GetComponent<EdgeCollider2D>();
+        }
+        GenerateColliderFromWaypoints();
+    }
+
 }

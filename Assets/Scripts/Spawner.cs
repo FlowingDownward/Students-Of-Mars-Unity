@@ -12,10 +12,16 @@ public class Spawner : MonoBehaviour
     private int waveCounter = 0;
     
     private WaveData CurrentWave => waves[currentWaveIndex];
+    private WaveSegment CurrentSegment => CurrentWave.segments[currentSegmentIndex];
+
+    private int currentSegmentIndex = 0;
+    private int spawnedInSegment = 0;
+
+    // Total Wave Tracking
+    private int totalEnemiesThisWave = 0;
+    private int enemiesRemoved = 0;
 
     private float spawnTimer;
-    private float spawnCounter;
-    private int enemiesRemoved;
 
     private bool isWaveActive = false;
     private bool waitingForNextWave = true;
@@ -66,17 +72,13 @@ public class Spawner : MonoBehaviour
 
         spawnTimer -= Time.deltaTime;
 
-        if (spawnTimer <= 0 && spawnCounter < CurrentWave.enemiesPerWave)
+        if (spawnTimer <= 0f)
         {
-            spawnTimer = CurrentWave.spawnInterval;
-
-            SpawnEnemy();
-            spawnCounter++;
+            HandleSpawning();
         }
 
-        // Wave completed
-        if (spawnCounter >= CurrentWave.enemiesPerWave &&
-            enemiesRemoved >= CurrentWave.enemiesPerWave)
+        // Entire wave complete
+        if (AllEnemiesSpawned() && enemiesRemoved >= totalEnemiesThisWave)
         {
             EndWave();
         }
@@ -85,7 +87,9 @@ public class Spawner : MonoBehaviour
     public void StartNextWave()
     {
         if (!waitingForNextWave)
+        {
             return;
+        }
 
         if (currentWaveIndex >= waves.Length)
         {
@@ -98,9 +102,14 @@ public class Spawner : MonoBehaviour
         isWaveActive = true;
         waitingForNextWave = false;
 
-        spawnCounter = 0;
-        enemiesRemoved = 0;
         spawnTimer = 0f;
+
+        currentSegmentIndex = 0;
+        spawnedInSegment = 0;
+
+        enemiesRemoved = 0;
+
+        CalculateTotalEnemies();
 
         waveCounter++;
         OnWaveChanged?.Invoke(waveCounter);
@@ -116,12 +125,52 @@ public class Spawner : MonoBehaviour
         currentWaveIndex++;
     }
 
-    private void SpawnEnemy()
+    public bool CanStartWave()
     {
-        if (poolDictionary.TryGetValue(CurrentWave.enemyType, out var pool))
+        return waitingForNextWave;
+    }
+
+    private void HandleSpawning()
+    {
+        // Finished all segments
+        if (currentSegmentIndex >= CurrentWave.segments.Length)
+            return;
+
+        // Spawn current segment enemies
+        if (spawnedInSegment < CurrentSegment.enemyCount)
+        {
+            SpawnEnemy(CurrentSegment.enemyType);
+
+            spawnedInSegment++;
+
+            spawnTimer = CurrentSegment.spawnInterval;
+        }
+        else
+        {
+            AdvanceSegment();
+        }
+    }
+
+    private void AdvanceSegment()
+    {
+        currentSegmentIndex++;
+        spawnedInSegment = 0;
+
+        // Immediate spawn for next segment
+        spawnTimer = 0f;
+    }
+
+    private bool AllEnemiesSpawned()
+    {
+        return currentSegmentIndex >= CurrentWave.segments.Length;
+    }    
+
+    private void SpawnEnemy(EnemyType enemyType)
+    {
+        if (poolDictionary.TryGetValue(enemyType, out var pool))
         {
             GameObject spawnedObject = pool.GetPooledObject();
-            
+
             if (spawnedObject != null)
             {
                 spawnedObject.transform.position = transform.position;
@@ -140,8 +189,15 @@ public class Spawner : MonoBehaviour
         enemiesRemoved ++;
     }
 
-    public bool CanStartWave()
+    private void CalculateTotalEnemies()
     {
-        return waitingForNextWave;
+        totalEnemiesThisWave = 0;
+
+        foreach (WaveSegment segment in CurrentWave.segments)
+        {
+            totalEnemiesThisWave += segment.enemyCount;
+        }
     }
+
+    
 }

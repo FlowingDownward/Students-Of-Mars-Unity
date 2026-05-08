@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PathBlocker
   - Water
   - UI
-  - Tower
-  - Blocked
+  - 
+  - 
   - 
   - 
   - 
@@ -41,6 +41,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2554248799
     locked: 0
   m_RenderingLayers:
   - Default

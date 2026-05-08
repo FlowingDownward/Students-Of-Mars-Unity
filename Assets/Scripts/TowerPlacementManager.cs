@@ -12,12 +12,8 @@ public class TowerPlacementManager : MonoBehaviour
     private Camera mainCamera;
 
     [SerializeField] private LayerMask blockedLayer;
-
     [SerializeField] private Path path;
-    [SerializeField] private float minDistanceFromPath = 1.5f;
-
     [SerializeField] private TMP_Text placementHintText;
-
 
     private TowerPreview previewVisual;
     private bool canPlace;
@@ -71,10 +67,9 @@ public class TowerPlacementManager : MonoBehaviour
 
     private void ValidatePlacement(Vector3 position)
     {
+        Collider2D hit = Physics2D.OverlapCircle(position, 0.5f,blockedLayer );
 
-        bool tooCloseToPath = path.IsPointTooClose(position, minDistanceFromPath);
-
-        canPlace = !tooCloseToPath;
+        canPlace = hit == null;
 
         if (previewVisual != null)
         {
@@ -123,5 +118,15 @@ public class TowerPlacementManager : MonoBehaviour
 
         if (col != null)
             col.enabled = !previewMode;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        if (previewObject != null)
+        {
+            Gizmos.DrawWireSphere(previewObject.transform.position, 0.5f);
+        }
     }
 }

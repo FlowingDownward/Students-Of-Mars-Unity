@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6142185809026353375}
   - component: {fileID: 6205266181939024453}
   - component: {fileID: 1247765536441054753}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sniper Guntower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject winPanel;
+    public GameObject losePanel;
+    
     public static event Action<int> OnLivesChanged;
     public static event Action<int> OnCreditsChanged;
 
     private int playerLives = 30;
-    private int playerCredits = 20;
+    private int playerCredits = 50;
     
     public int PlayerCredits => playerCredits;
 
@@ -34,7 +37,6 @@ public class GameManager : MonoBehaviour
     {
         Enemy.OnEnemyReachedEnd -= HandleEnemyReachedEnd;
         Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed;
-
     }
 
     public bool TrySpendCredits(int amount)
@@ -51,6 +53,10 @@ public class GameManager : MonoBehaviour
         
         playerLives = Mathf.Max(0, playerLives - data.damage);
         OnLivesChanged?.Invoke(playerLives);
+        if (playerLives <= 0)
+        {
+            LoseGame();
+        }
     }
 
     private void HandleEnemyDestroyed(Enemy enemy)
@@ -58,5 +64,32 @@ public class GameManager : MonoBehaviour
         playerCredits += enemy.Data.reward;
         OnCreditsChanged?.Invoke(playerCredits);
     }
+
+    //Win/Loss conditions
+    private void WinGame()
+    {
+        Time.timeScale = 0f;
+        winPanel.SetActive(true);
+    }
+
+    private void LoseGame()
+    {
+        Time.timeScale = 0f;
+        losePanel.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+    }
+    
+    public void ToTitle()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+
 
 }
