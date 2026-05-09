@@ -3,7 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+
+    [SerializeField] private GameObject titlePanel;
+    [SerializeField] private GameObject instructionsPanel;
+
+
+    public void PlayPressed()
+    {
+        ShowInstructions();
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene("Game");
     }
@@ -12,4 +22,12 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private void ShowInstructions()
+    {
+        titlePanel.SetActive(false);
+        instructionsPanel.SetActive(true);
+    }
+
+    
 }

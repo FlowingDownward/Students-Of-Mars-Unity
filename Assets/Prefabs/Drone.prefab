@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2857826009773316606}
   - component: {fileID: 7971188312377230859}
   - component: {fileID: -8670463566752695772}
-  - component: {fileID: 6824536455013775104}
+  - component: {fileID: 7254702602310826239}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.99146, y: 0.25313714, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2642694943385210932}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1378406252391678146, guid: caeb437f6d056e34684eb798631bb8ed, type: 3}
+  m_Sprite: {fileID: 4112356383579328530, guid: c72d4cba4d9ec414c8e6cd58079ac562, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,8 +135,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &6824536455013775104
-CircleCollider2D:
+--- !u!70 &7254702602310826239
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -170,7 +170,8 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.46
+  m_Size: {x: 4.04, y: 1.51}
+  m_Direction: 1
 --- !u!1 &5297753646173983629
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,8 +198,8 @@ Transform:
   m_GameObject: {fileID: 5297753646173983629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.5, y: 1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8785176683178844779}

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: GattlingGuntower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 8316936934535606394, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-  range: 4.5
+  range: 8
   attackSpeed: 0.2
   projectileSpeed: 15
   projectileDuration: 2
-  projectileSize: 0.7
+  projectileSize: 3
   isExplosiveProjectile: 0
   explosionDuration: 0
   damage: 0.5

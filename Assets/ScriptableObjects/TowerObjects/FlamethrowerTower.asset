@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: FlamethrowerTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 7391765187115874301, guid: 5088cab9f3806f64f854a07da26f07ee, type: 3}
-  range: 4.5
+  range: 7
   attackSpeed: 0.1
   projectileSpeed: 15
   projectileDuration: 1.5
   projectileSize: 1
   isExplosiveProjectile: 0
   explosionDuration: 0
-  damage: 0.1
+  damage: 0.3
   price: 75

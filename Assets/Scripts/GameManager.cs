@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleEnemyDestroyed(Enemy enemy)
     {
+        if (enemy.Data.isQueen)
+        {
+            WinGame();
+        }
         playerCredits += enemy.Data.reward;
         OnCreditsChanged?.Invoke(playerCredits);
     }

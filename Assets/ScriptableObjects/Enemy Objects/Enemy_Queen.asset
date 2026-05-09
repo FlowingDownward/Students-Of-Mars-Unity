@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 826332d410cf52447a0b0aaed3a46a07, type: 3}
-  m_Name: Enemy_Speeder
+  m_Name: Enemy_Queen
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 3
-  damage: 1
-  speed: 3
-  reward: 3
-  isQueen: 0
+  health: 100
+  damage: 300
+  speed: 1.5
+  reward: 0
+  isQueen: 1

@@ -4,5 +4,6 @@ public enum EnemyType
 {
     Drone,
     Speeder,
-    Tank
+    Tank,
+    Queen
 }

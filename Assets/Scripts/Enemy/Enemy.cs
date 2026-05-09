@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private int _currentWaypoint;
     private float _health;
 
+    private bool isDead = false;
+
     [SerializeField] private Transform healthBar;
     private Vector3 healthBarOriginalScale;
 
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour
         _currentWaypoint = 0;
         _targetPosition = currentPath.GetPosition(_currentWaypoint);
         _health = data.health;
+        isDead = false;
         UpdateHealthBar();
     }
 
@@ -57,12 +60,19 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage (float damage)
     {
+        if (isDead) return;
+
         _health -= damage;
+        Debug.Log($"Health Left: {_health}");
         _health = Math.Max(_health, 0);
         UpdateHealthBar();
 
         if (_health <= 0)
         {
+            if (isDead) return;
+
+            isDead = true;
+            
             OnEnemyDestroyed?.Invoke(this);
             gameObject.SetActive(false);
         }

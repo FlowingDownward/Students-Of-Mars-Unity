@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826332d410cf52447a0b0aaed3a46a07, type: 3}
   m_Name: Enemy_Drone
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 3
-  damage: 1
+  health: 4
+  damage: 2
   speed: 2
   reward: 5
+  isQueen: 0

@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private ObjectPooler dronePool;
     [SerializeField] private ObjectPooler speederPool;
     [SerializeField] private ObjectPooler tankPool;
+    [SerializeField] private ObjectPooler queenPool;
+    
 
     private Dictionary<EnemyType, ObjectPooler> poolDictionary;
 
@@ -40,6 +42,7 @@ public class Spawner : MonoBehaviour
             {EnemyType.Drone, dronePool},
             {EnemyType.Speeder, speederPool},
             {EnemyType.Tank, tankPool},
+            {EnemyType.Queen, queenPool}
         };
     }
 

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 6757784435591891849, guid: 41285bfb74ef1b448ac3bcb38de0e213, type: 3}
   range: 12
-  attackSpeed: 1
+  attackSpeed: 1.5
   projectileSpeed: 15
   projectileDuration: 2
   projectileSize: 1.5
   isExplosiveProjectile: 1
-  explosionDuration: 3
-  damage: 2
+  explosionDuration: 2
+  damage: 1
   price: 125

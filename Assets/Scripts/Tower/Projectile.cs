@@ -7,6 +7,13 @@ public class Projectile : MonoBehaviour
     private float _projectileDuration;
     [SerializeField] private bool isFire;
 
+    private bool hasHit;
+
+    private void OnEnable()
+    {
+        hasHit = false;
+    }
+
     void Start()
     {
         transform.localScale = Vector3.one * _data.projectileSize;
@@ -27,19 +34,26 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasHit) return;
+
         if (collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<Enemy>();
-            
-            enemy.TakeDamage(_data.damage);
 
-            if (enemy != null)
+            if (_data.isExplosiveProjectile)
             {
                 OnHit(enemy);
             }
+            else
+            {
+                enemy.TakeDamage(_data.damage);
+                Debug.Log($"Damage dealt: {_data.damage}");
+            }
+            
 
             if (!isFire)
             {
+                hasHit = true;
                 gameObject.SetActive(false);
             }
         }

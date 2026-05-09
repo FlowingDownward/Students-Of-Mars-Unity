@@ -1125,8 +1125,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2234,9 +2234,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0d0bfaad6019d3845b39217e2b7749e1, type: 2}
   - {fileID: 11400000, guid: 1251d368a818f634dbf6d8220c3da4d5, type: 2}
   - {fileID: 11400000, guid: d6469a4b0720b31428e68e8785aeb190, type: 2}
+  - {fileID: 11400000, guid: 3c10dddf7305246468f793dc992697ff, type: 2}
+  - {fileID: 11400000, guid: cc72f39fa7daab5499faec2693d1e207, type: 2}
+  - {fileID: 11400000, guid: 5c24dea22a579284c9e47b4ff2a69b33, type: 2}
+  - {fileID: 11400000, guid: 428ccb35248a2144699f7ffc9cfdcab8, type: 2}
+  - {fileID: 11400000, guid: 760e5c1797aac2640980ab693e75f605, type: 2}
+  - {fileID: 11400000, guid: d99825bb48558264a9a844ebc80590a5, type: 2}
+  - {fileID: 11400000, guid: dd2b95cdb626ef44cade326c6a90f38a, type: 2}
   dronePool: {fileID: 582432130}
   speederPool: {fileID: 969890914}
   tankPool: {fileID: 174974104}
+  queenPool: {fileID: 1061773914}
 --- !u!4 &521612023
 Transform:
   m_ObjectHideFlags: 0
@@ -2253,6 +2261,7 @@ Transform:
   - {fileID: 582432131}
   - {fileID: 969890915}
   - {fileID: 174974105}
+  - {fileID: 1061773913}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582432129
@@ -2895,7 +2904,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 847262996}
         m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
         m_MethodName: SelectTower
         m_Mode: 1
@@ -3535,6 +3544,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57e27322a9d9274ba9d026eff2ecaa6, type: 3}
+--- !u!1 &1061773912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061773913}
+  - component: {fileID: 1061773914}
+  m_Layer: 0
+  m_Name: QueenPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1061773913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061773912}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 521612023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1061773914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061773912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ed95c2a36eada4ebfddab063a2492a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
+  prefab: {fileID: 512345052865946923, guid: cb8dd54f9b4818045b1bc33cb7005e26, type: 3}
+  poolSize: 1
 --- !u!1001 &1064535407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5159,7 +5214,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1648476067}
         m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
         m_MethodName: SelectTower
         m_Mode: 1
