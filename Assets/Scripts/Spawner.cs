@@ -137,7 +137,10 @@ public class Spawner : MonoBehaviour
     {
         // Finished all segments
         if (currentSegmentIndex >= CurrentWave.segments.Length)
+        {
             return;
+        }
+           
 
         // Spawn current segment enemies
         if (spawnedInSegment < CurrentSegment.enemyCount)

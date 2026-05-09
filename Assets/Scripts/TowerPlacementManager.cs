@@ -47,7 +47,7 @@ public class TowerPlacementManager : MonoBehaviour
     {
         selectedTower = towerData;
         previewObject = Instantiate(towerData.prefab);
-        Debug.Log("Preview");
+        //Debug.Log("Preview");
 
         previewVisual = previewObject.GetComponent<TowerPreview>();
         SetPreviewMode(previewObject, true);
@@ -86,10 +86,10 @@ public class TowerPlacementManager : MonoBehaviour
 
     if (!GameManager.Instance.TrySpendCredits(selectedTower.price))
     {
-        Debug.Log("Not enough credits!");
+        //Debug.Log("Not enough credits!");
         return;
     }
-        Debug.Log("Enough credits!");
+        //Debug.Log("Enough credits!");
 
         Instantiate(selectedTower.prefab,
         previewObject.transform.position,
@@ -117,7 +117,9 @@ public class TowerPlacementManager : MonoBehaviour
         Collider2D col = tower.GetComponent<Collider2D>();
 
         if (col != null)
+        {
             col.enabled = !previewMode;
+        }
     }
 
     private void OnDrawGizmosSelected()

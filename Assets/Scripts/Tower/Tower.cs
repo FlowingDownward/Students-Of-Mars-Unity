@@ -54,7 +54,7 @@ public class Tower : MonoBehaviour
         {
             Enemy enemy = collision.GetComponent<Enemy>();
             enemiesInRange.Add(enemy);
-            Debug.Log("Enemy has entered tower range");
+            //Debug.Log("Enemy has entered tower range");
         }
     }
 
@@ -66,7 +66,7 @@ public class Tower : MonoBehaviour
             if (enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Remove(enemy);
-                Debug.Log("Enemy has left tower range");
+                //Debug.Log("Enemy has left tower range");
 
             }
         }
@@ -77,7 +77,7 @@ public class Tower : MonoBehaviour
     {
         if (enemiesInRange.Count > 0)
         {
-            Debug.Log("Tower is attempting to fire");
+            //Debug.Log("Tower is attempting to fire");
 
             GameObject projectile = projectilePool.GetPooledObject();
             projectile.transform.position = transform.position;

@@ -39,7 +39,7 @@ public class TowerButton : MonoBehaviour
             return;
         }
 
-        Debug.Log("Button clicked: " + towerData.name);
+        //Debug.Log("Button clicked: " + towerData.name);
         TowerPlacementManager.Instance.BeginPlacement(towerData);
     }
 }

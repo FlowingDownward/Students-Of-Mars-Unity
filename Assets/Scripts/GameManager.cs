@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
     public bool TrySpendCredits(int amount)
     {
         if (playerCredits < amount)
+        {
             return false;
-
+        }
+            
         playerCredits -= amount;
         OnCreditsChanged?.Invoke(playerCredits);
         return true;
@@ -93,7 +95,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
-
-
-
 }

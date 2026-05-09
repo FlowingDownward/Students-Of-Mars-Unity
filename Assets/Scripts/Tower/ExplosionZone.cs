@@ -54,7 +54,9 @@ public class ExplosionZone : MonoBehaviour
             Enemy enemy = collision.GetComponent<Enemy>();
 
             if (enemy != null && !enemiesInZone.Contains(enemy))
+            {
                 enemiesInZone.Add(enemy);
+            }
         }
     }
 
@@ -65,7 +67,9 @@ public class ExplosionZone : MonoBehaviour
             Enemy enemy = collision.GetComponent<Enemy>();
 
             if (enemy != null)
+            {
                 enemiesInZone.Remove(enemy);
+            }
         }
     }
 }

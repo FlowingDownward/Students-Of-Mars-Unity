@@ -51,16 +51,16 @@ public class Path : MonoBehaviour
     public void GenerateColliderFromWaypoints()
     {
         if (Waypoints == null || Waypoints.Length < 2)
+        {
             return;
+        }
 
         Vector2[] points = new Vector2[Waypoints.Length];
 
         for (int i = 0; i < Waypoints.Length; i++)
         {
             // convert world to local space
-            points[i] = transform.InverseTransformPoint(
-                Waypoints[i].transform.position
-            );
+            points[i] = transform.InverseTransformPoint(Waypoints[i].transform.position);
         }
 
         edgeCollider.points = points;
@@ -69,8 +69,10 @@ public class Path : MonoBehaviour
     public void GenerateLineFromWaypoints()
     {
         if (Waypoints == null || Waypoints.Length < 2)
+        {
             return;
-
+        }
+        
         lineRenderer.positionCount = Waypoints.Length;
 
         for (int i = 0; i < Waypoints.Length; i++)

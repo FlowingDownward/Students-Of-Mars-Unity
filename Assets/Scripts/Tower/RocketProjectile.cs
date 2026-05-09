@@ -11,17 +11,10 @@ public class RocketProjectile : Projectile
 
     private void Explode()
     {
-        GameObject zone = Instantiate(
-            explosionZonePrefab,
-            transform.position,
-            Quaternion.identity
-        );
+        GameObject zone = Instantiate(explosionZonePrefab, transform.position, Quaternion.identity);
 
         ExplosionZone ez = zone.GetComponent<ExplosionZone>();
 
-        ez.Initialize(
-            _data.damage,
-            _data.explosionDuration
-        );
+        ez.Initialize(_data.damage, _data.explosionDuration);
     }
 }

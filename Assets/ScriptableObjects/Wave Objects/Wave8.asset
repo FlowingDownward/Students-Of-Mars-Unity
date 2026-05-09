@@ -17,5 +17,5 @@ MonoBehaviour:
     spawnInterval: 1
     enemyCount: 20
   - enemyType: 1
-    spawnInterval: 1
-    enemyCount: 10
+    spawnInterval: 0.5
+    enemyCount: 30

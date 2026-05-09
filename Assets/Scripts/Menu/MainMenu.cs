@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject titlePanel;
     [SerializeField] private GameObject instructionsPanel;
-
+    [SerializeField] private GameObject creditsPanel;
 
     public void PlayPressed()
     {
@@ -29,5 +29,16 @@ public class MainMenu : MonoBehaviour
         instructionsPanel.SetActive(true);
     }
 
+    public void ShowCredits()
+    {
+        titlePanel.SetActive(false);
+        creditsPanel.SetActive(true);
+    }
+
+    public void ShowTitleFromCredits()
+    {
+        creditsPanel.SetActive(false);
+        titlePanel.SetActive(true);
+    }
     
 }
