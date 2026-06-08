@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
 
     private List<Enemy> enemiesInRange;
     private ObjectPooler projectilePool;
+    private GameObject rangeIndicator;
 
     private float shootTimer;
 

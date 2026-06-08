@@ -14,9 +14,11 @@ public class TowerPlacementManager : MonoBehaviour
     [SerializeField] private LayerMask blockedLayer;
     [SerializeField] private Path path;
     [SerializeField] private TMP_Text placementHintText;
+    [SerializeField] private GameObject rangeIndicator;
 
     private TowerPreview previewVisual;
     private bool canPlace;
+    private GameObject activeRangeIndicator;
 
     private void Awake()
     {
@@ -48,10 +50,17 @@ public class TowerPlacementManager : MonoBehaviour
         selectedTower = towerData;
         previewObject = Instantiate(towerData.prefab);
         //Debug.Log("Preview");
-
         previewVisual = previewObject.GetComponent<TowerPreview>();
         SetPreviewMode(previewObject, true);
+        
+        
         placementHintText.gameObject.SetActive(true);
+        activeRangeIndicator = Instantiate(rangeIndicator);
+
+        float diameter = towerData.range;
+
+        activeRangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1f);
+
     }
 
     private void FollowMouse()
@@ -61,6 +70,11 @@ public class TowerPlacementManager : MonoBehaviour
         worldPos.z = 0f;
 
         previewObject.transform.position = worldPos;
+
+         if (activeRangeIndicator != null)
+        {
+            activeRangeIndicator.transform.position = worldPos;
+        }
 
         ValidatePlacement(worldPos);
     }
@@ -75,26 +89,39 @@ public class TowerPlacementManager : MonoBehaviour
         {
             previewVisual.SetValid(canPlace);
         }
+
+        if (activeRangeIndicator != null)
+        {
+            SpriteRenderer sr = activeRangeIndicator.GetComponent<SpriteRenderer>();
+
+            if (sr != null)
+            {
+                Debug.Log("Red");
+                sr.color = canPlace
+                    ? new Color(0f, 1f, 0f, 0.25f)
+                    : new Color(1f, 0f, 0f, 0.25f);
+            }
+        }
     }
 
     private void PlaceTower()
     {
         if (!canPlace)
+            return;
+
+        if (!GameManager.Instance.TrySpendCredits(selectedTower.price))
         {
+            //Debug.Log("Not enough credits!");
             return;
         }
-
-    if (!GameManager.Instance.TrySpendCredits(selectedTower.price))
-    {
-        //Debug.Log("Not enough credits!");
-        return;
-    }
         //Debug.Log("Enough credits!");
 
-        Instantiate(selectedTower.prefab,
-        previewObject.transform.position,
-        Quaternion.identity);
+        Instantiate(selectedTower.prefab, previewObject.transform.position, Quaternion.identity);
         Destroy(previewObject);
+
+        if (activeRangeIndicator != null)
+            Destroy(activeRangeIndicator);
+
 
         previewObject = null;
         selectedTower = null;
@@ -105,6 +132,9 @@ public class TowerPlacementManager : MonoBehaviour
     private void CancelPlacement()
     {
         Destroy(previewObject);
+
+        if (activeRangeIndicator != null)
+            Destroy(activeRangeIndicator);
 
         previewObject = null;
         selectedTower = null;
