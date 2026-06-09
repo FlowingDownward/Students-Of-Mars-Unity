@@ -5,7 +5,9 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] private TowerData data;
-    private CircleCollider2D circleCollider;
+    [SerializeField] private CircleCollider2D rangeCollider;
+
+    public TowerData Data => data;
 
     private List<Enemy> enemiesInRange;
     private ObjectPooler projectilePool;
@@ -25,8 +27,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        circleCollider = GetComponent<CircleCollider2D>();
-        circleCollider.radius = data.range;
+        rangeCollider.radius = data.range;
         enemiesInRange = new List<Enemy>();
         projectilePool = GetComponent<ObjectPooler>();
         shootTimer = data.attackSpeed;
@@ -47,31 +48,19 @@ public class Tower : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, data.range*.3f);
     }
 
-
-    //Range Handling
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void AddEnemy(Enemy enemy)
     {
-        if (collision.CompareTag("Enemy"))
+        if (!enemiesInRange.Contains(enemy))
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
             enemiesInRange.Add(enemy);
-            //Debug.Log("Enemy has entered tower range");
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void RemoveEnemy(Enemy enemy)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            if (enemiesInRange.Contains(enemy))
-            {
-                enemiesInRange.Remove(enemy);
-                //Debug.Log("Enemy has left tower range");
-
-            }
-        }
+        enemiesInRange.Remove(enemy);
     }
+    
 
     // Targeting and Shooting
     private void Fire()
