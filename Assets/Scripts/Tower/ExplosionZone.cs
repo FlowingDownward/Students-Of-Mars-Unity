@@ -6,6 +6,7 @@ public class ExplosionZone : MonoBehaviour
     private float damagePerTick;
     private float duration;
     private float tickRate = 0.2f;
+    private Tower ownerTower;
 
     private float tickTimer;
 
@@ -43,7 +44,7 @@ public class ExplosionZone : MonoBehaviour
 
         foreach (var enemy in enemiesInZone)
         {
-            enemy.TakeDamage(damagePerTick);
+            enemy.TakeDamage(damagePerTick, ownerTower);
         }
     }
 

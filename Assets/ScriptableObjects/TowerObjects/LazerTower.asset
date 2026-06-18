@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LazerTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 1083293338089138313, guid: 25e8978d0d7a44942b14d45a18ffbac8, type: 3}
+  towerName: Lazer Tower
   range: 10
   attackSpeed: 1
   projectileSpeed: 20

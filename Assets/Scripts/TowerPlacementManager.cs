@@ -57,7 +57,7 @@ public class TowerPlacementManager : MonoBehaviour
         placementHintText.gameObject.SetActive(true);
         activeRangeIndicator = Instantiate(rangeIndicator);
 
-        float diameter = towerData.range;
+        float diameter = towerData.range / 2;
 
         activeRangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1f);
 
@@ -117,6 +117,7 @@ public class TowerPlacementManager : MonoBehaviour
         //Debug.Log("Enough credits!");
 
         Instantiate(selectedTower.prefab, previewObject.transform.position, Quaternion.identity);
+        TowerSelectionManager.Instance.IgnoreSelectionForOneFrame();
         Destroy(previewObject);
 
         if (activeRangeIndicator != null)

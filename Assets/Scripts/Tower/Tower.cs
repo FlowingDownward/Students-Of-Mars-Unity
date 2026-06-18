@@ -14,6 +14,11 @@ public class Tower : MonoBehaviour
     private GameObject rangeIndicator;
 
     private float shootTimer;
+    private int killCount = 0;
+    public int KillCount => killCount;
+
+    public static event Action<int> OnKillCountChanged;
+
 
     private void OnEnable()
     {
@@ -73,8 +78,16 @@ public class Tower : MonoBehaviour
             projectile.transform.position = transform.position;
             projectile.SetActive(true);
             Vector2 shootDirection = (enemiesInRange[0].transform.position - transform.position).normalized;
-            projectile.GetComponent<Projectile>().Shoot(data, shootDirection);
+            projectile.GetComponent<Projectile>().Shoot(data, shootDirection, this);
         }
+    }
+
+    public void RegisterKill()
+    {
+        killCount++;
+        Debug.Log($"{name} has {killCount} kills");
+
+        OnKillCountChanged?.Invoke(killCount);
     }
 
     private void HandleEnemyDestroyed(Enemy enemy)

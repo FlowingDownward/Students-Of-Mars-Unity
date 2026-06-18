@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
     private Vector3 _shootDirection;
     private float _projectileDuration;
     [SerializeField] private bool isFire;
+    private Tower ownerTower;
 
     private bool hasHit;
 
@@ -46,7 +47,7 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                enemy.TakeDamage(_data.damage);
+                enemy.TakeDamage(_data.damage, ownerTower);
                 Debug.Log($"Damage dealt: {_data.damage}");
             }
             
@@ -62,15 +63,16 @@ public class Projectile : MonoBehaviour
     //To override
     protected virtual void OnHit(Enemy enemy)
     {
-        enemy.TakeDamage(_data.damage);
+        enemy.TakeDamage(_data.damage, ownerTower);
     }
 
 
-    public void Shoot(TowerData data, Vector3 shootDirection)
+    public void Shoot(TowerData data, Vector3 shootDirection, Tower owner)
     {
         _data = data;
         _shootDirection = shootDirection;
         _projectileDuration = data.projectileDuration;
+        ownerTower = owner;
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle -90f);

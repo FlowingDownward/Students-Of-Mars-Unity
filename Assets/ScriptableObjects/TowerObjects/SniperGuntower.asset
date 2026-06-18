@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SniperGuntower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   prefab: {fileID: 7814010061299923796, guid: d5917533a8d39ef4ca5b10d39994788b, type: 3}
+  towerName: Sniper Tower
   range: 12
   attackSpeed: 2
   projectileSpeed: 20

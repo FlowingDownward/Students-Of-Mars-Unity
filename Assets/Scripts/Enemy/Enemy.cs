@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage (float damage)
+    public void TakeDamage (float damage, Tower sourceTower)
     {
         if (isDead) return;
 
@@ -72,6 +72,8 @@ public class Enemy : MonoBehaviour
             if (isDead) return;
 
             isDead = true;
+            
+            sourceTower?.RegisterKill();
             
             OnEnemyDestroyed?.Invoke(this);
             gameObject.SetActive(false);

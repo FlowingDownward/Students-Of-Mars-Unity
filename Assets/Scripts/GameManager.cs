@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnCreditsChanged;
 
     private int playerLives = 30;
-    private int playerCredits = 50;
+    private int playerCredits = 500;
     
     public int PlayerCredits => playerCredits;
 

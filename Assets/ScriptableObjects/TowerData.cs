@@ -4,6 +4,8 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     public GameObject prefab;
+
+    public string towerName;
     
     public float range;
     public float attackSpeed;
