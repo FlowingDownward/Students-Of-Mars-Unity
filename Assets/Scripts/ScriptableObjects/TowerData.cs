@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     public GameObject prefab;
+    public ProjectileData projectileFired;
 
     public string towerName;
     
@@ -13,9 +14,11 @@ public class TowerData : ScriptableObject
     public float projectileDuration;
     public float projectileSize;
     
-    public bool isExplosiveProjectile;
-    public float explosionDuration; 
+    
     public float damage;
     public int price;
+
+    public TowerUpgrade[] upgradePathOne;
+    public TowerUpgrade[] upgradePathTwo;
 
 }

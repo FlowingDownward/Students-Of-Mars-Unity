@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2576753157164691391}
   - component: {fileID: 6775447223190320946}
-  - component: {fileID: 3774782061328232044}
   - component: {fileID: 1933826962108883695}
   - component: {fileID: 8797004558176653375}
   m_Layer: 6
@@ -50,20 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   data: {fileID: 11400000, guid: 40cec6dd99f507b4e9943780377362d7, type: 2}
   rangeCollider: {fileID: 1393085534892798688}
---- !u!114 &3774782061328232044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128706447885169290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ed95c2a36eada4ebfddab063a2492a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  prefab: {fileID: 6209416152776330547, guid: 54b1aba0d0412bf45b3f20237b50b460, type: 3}
-  poolSize: 5
+  isbeingViewed: 0
 --- !u!212 &1933826962108883695
 SpriteRenderer:
   m_ObjectHideFlags: 0

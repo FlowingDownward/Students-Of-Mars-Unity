@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour
     private List<Enemy> enemiesInRange;
     private ObjectPooler projectilePool;
     private GameObject rangeIndicator;
+    private ProjectileData currentProjectile;
 
     private float shootTimer;
     private int killCount = 0;
@@ -19,6 +20,7 @@ public class Tower : MonoBehaviour
 
     public static event Action<int> OnKillCountChanged;
 
+    public bool isbeingViewed = false;
 
     private void OnEnable()
     {
@@ -35,6 +37,7 @@ public class Tower : MonoBehaviour
         rangeCollider.radius = data.range;
         enemiesInRange = new List<Enemy>();
         projectilePool = GetComponent<ObjectPooler>();
+        currentProjectile = data.projectileFired;
         shootTimer = data.attackSpeed;
     }
 
@@ -74,11 +77,10 @@ public class Tower : MonoBehaviour
         {
             //Debug.Log("Tower is attempting to fire");
 
-            GameObject projectile = projectilePool.GetPooledObject();
+            Projectile projectile = ProjectilePoolManager.Instance.GetProjectile(data.projectileFired.prefab);
             projectile.transform.position = transform.position;
-            projectile.SetActive(true);
             Vector2 shootDirection = (enemiesInRange[0].transform.position - transform.position).normalized;
-            projectile.GetComponent<Projectile>().Shoot(data, shootDirection, this);
+            projectile.Shoot(data, currentProjectile, shootDirection, this);
         }
     }
 
@@ -86,13 +88,20 @@ public class Tower : MonoBehaviour
     {
         killCount++;
         Debug.Log($"{name} has {killCount} kills");
-
-        OnKillCountChanged?.Invoke(killCount);
+        if (isbeingViewed == true)
+        {
+            OnKillCountChanged?.Invoke(killCount);
+        }
     }
 
     private void HandleEnemyDestroyed(Enemy enemy)
     {
         enemiesInRange.Remove(enemy);
+    }
+
+    public void SetProjectile(Projectile newProjectile)
+    {
+        //currentProjectile = newProjectile;
     }
 
 }

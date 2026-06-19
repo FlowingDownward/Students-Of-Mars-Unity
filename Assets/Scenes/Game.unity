@@ -3872,6 +3872,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57e27322a9d9274ba9d026eff2ecaa6, type: 3}
+--- !u!1001 &1092127575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1128706447885169290, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_Name
+      value: Basic Guntower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576753157164691391, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33e4d0cd896790f4cae4220869f5d39e, type: 3}
 --- !u!1001 &1214731876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6299,6 +6356,9 @@ MonoBehaviour:
   waveText: {fileID: 202609379}
   livesText: {fileID: 1556239151}
   creditsText: {fileID: 218080655}
+  unitPanel: {fileID: 121191679}
+  towerText: {fileID: 204732055}
+  killcountText: {fileID: 1481850520}
 --- !u!1 &1739605301
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,6 +7303,7 @@ GameObject:
   - component: {fileID: 1969116630}
   - component: {fileID: 1969116632}
   - component: {fileID: 1969116633}
+  - component: {fileID: 1969116634}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7313,9 +7374,19 @@ MonoBehaviour:
   towerSelectionMask:
     serializedVersion: 2
     m_Bits: 64
-  unitPanel: {fileID: 121191679}
-  towerText: {fileID: 204732055}
-  killcountText: {fileID: 1481850520}
+--- !u!114 &1969116634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969116629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626ccdbca9e589543acfee9056d1ccfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePoolManager
+  defaultPoolSize: 5
 --- !u!1001 &2040108704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7464,63 +7535,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57e27322a9d9274ba9d026eff2ecaa6, type: 3}
---- !u!1001 &436761386000612131
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8316936934535606394, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_Name
-      value: Gattling Guntower
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.228603
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4524517
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145955856944735090, guid: d4905804544757340b18103fd9e21cd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d4905804544757340b18103fd9e21cd4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7532,4 +7546,4 @@ SceneRoots:
   - {fileID: 1672515456}
   - {fileID: 521612023}
   - {fileID: 1969116631}
-  - {fileID: 436761386000612131}
+  - {fileID: 1092127575}

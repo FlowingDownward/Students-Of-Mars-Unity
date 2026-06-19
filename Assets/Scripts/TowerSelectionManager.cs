@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -9,11 +10,8 @@ public class TowerSelectionManager : MonoBehaviour
 
     [SerializeField] private GameObject rangeIndicatorPrefab;
     [SerializeField] private LayerMask towerSelectionMask;
-    
-    //Panel UI
-    public GameObject unitPanel;
-    [SerializeField] private TMP_Text towerText;
-    [SerializeField] private TMP_Text killcountText;
+
+    public static event Action<Tower> OnNewTowerSelected;
 
     //Tower Selection
     private Tower selectedTower;
@@ -26,20 +24,8 @@ public class TowerSelectionManager : MonoBehaviour
     {
         Instance = this;
         mainCamera = Camera.main;
-        unitPanel.SetActive(false);
         Debug.Log("Tower Selection Active");
     }
-
-
-   private void OnEnable()
-   {
-        Tower.OnKillCountChanged += UpdateKillText;
-   }
-
-   private void OnDisable()
-   {
-        Tower.OnKillCountChanged -= UpdateKillText;
-   } 
 
     private void Update()
     {
@@ -60,29 +46,31 @@ public class TowerSelectionManager : MonoBehaviour
         DeselectCurrentTower();
 
         selectedTower = tower;
+        selectedTower.isbeingViewed = true;
         
         //Range Highlight
         activeRangeIndicator = Instantiate(rangeIndicatorPrefab);
         activeRangeIndicator.transform.position = tower.transform.position;
         float diameter = tower.Data.range / 2;
         activeRangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1f);
-
-        //Unit Panel Setup
-        unitPanel.SetActive(true);
-        towerText.text = $"{tower.Data.towerName}";
-        killcountText.text = $"Kills: {tower.KillCount}";
-
+        
+        OnNewTowerSelected?.Invoke(tower);
     }
 
     public void DeselectCurrentTower()
     {
+        if (selectedTower != null)
+        {
+            selectedTower.isbeingViewed = false;
+        }
+        
         selectedTower = null;
-
+        OnNewTowerSelected?.Invoke(null);
+        
         if (activeRangeIndicator != null)
         {
             Destroy(activeRangeIndicator);
             activeRangeIndicator = null;
-            unitPanel.SetActive(false);
         }
     }
     
@@ -132,10 +120,6 @@ public class TowerSelectionManager : MonoBehaviour
     }  
 
 
-    //Unit Panel Stuff
-    private void UpdateKillText (int newKillCount)
-    {
-        killcountText.text = $"Kills: {newKillCount}";
-    }
+    
     
 }

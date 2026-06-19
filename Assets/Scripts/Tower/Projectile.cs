@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private ProjectileData projectileData;
+    
+
     protected TowerData _data;
+    public ProjectileData Data => projectileData;
+
     private Vector3 _shootDirection;
     private float _projectileDuration;
-    [SerializeField] private bool isFire;
     private Tower ownerTower;
 
     private bool hasHit;
@@ -41,9 +45,9 @@ public class Projectile : MonoBehaviour
         {
             Enemy enemy = collision.GetComponent<Enemy>();
 
-            if (_data.isExplosiveProjectile)
+            if (projectileData.isExplosiveProjectile)
             {
-                OnHit(enemy);
+                Explode();
             }
             else
             {
@@ -51,30 +55,35 @@ public class Projectile : MonoBehaviour
                 Debug.Log($"Damage dealt: {_data.damage}");
             }
             
-
-            if (!isFire)
+            
+            if (!projectileData.isFire)
             {
                 hasHit = true;
                 gameObject.SetActive(false);
             }
+            
         }
     }
 
-    //To override
-    protected virtual void OnHit(Enemy enemy)
-    {
-        enemy.TakeDamage(_data.damage, ownerTower);
-    }
-
-
-    public void Shoot(TowerData data, Vector3 shootDirection, Tower owner)
+    
+    public void Shoot(TowerData data, ProjectileData projectileData, Vector3 shootDirection, Tower owner)
     {
         _data = data;
+        this.projectileData = projectileData;
         _shootDirection = shootDirection;
         _projectileDuration = data.projectileDuration;
         ownerTower = owner;
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle -90f);
+    }
+
+    private void Explode()
+    {
+        GameObject zone = Instantiate(projectileData.explosionZonePrefab, transform.position, Quaternion.identity);
+
+        ExplosionZone ez = zone.GetComponent<ExplosionZone>();
+
+        ez.Initialize(_data.damage, projectileData.explosionDuration);
     }
 }
